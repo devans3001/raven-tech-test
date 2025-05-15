@@ -1,0 +1,35 @@
+.container .grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas: "candle candle candle orderbook trades" "candle candle candle orderbook trades" "candle candle candle orderbook trades" "candle candle candle orderbook trades";
+  gap: 8px;
+  height: 80dvh;
+  min-height: 60dvh;
+  width: 100vw;
+  padding: 10px;
+}
+.container .grid-container .candle {
+  background-color: red;
+  grid-area: candle;
+  border-radius: 20px;
+}
+.container .grid-container .orderbook {
+  background-color: #20252B;
+  grid-area: orderbook;
+}
+.container .grid-container .trades {
+  background-color: #20252B;
+  grid-area: trades;
+  border-radius: 20px;
+}
+
+.scrollable-div {
+  overflow: auto; /* Enables scrolling */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.scrollable-div::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Opera */
+}/*# sourceMappingURL=main.css.map */

@@ -25,7 +25,7 @@ export function LimitSelect({ label, arr }) {
                 <SelectItem key={idx} value={item.value} className={"flex items-center"}>
                   <span className={`fi ${item.flag} rounded-full`}></span>
                   <p>
-                    <h2>{item.label}</h2>
+                    <span>{item.label}</span>
                     <span>{item.value}</span>
                   </p>
                 </SelectItem>

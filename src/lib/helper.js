@@ -12,3 +12,21 @@ export const formatNumber = (input) => {
       maximumFractionDigits: 2
     });
   };
+
+
+  export function formatMoney(value,car=2, currency = 'USD', locale = 'en-US') {
+    const numericValue = typeof value === 'string' 
+      ? parseFloat(value.replace(/[^0-9.-]/g, '')) 
+      : value;
+    
+    if (isNaN(numericValue)) {
+      throw new Error('Invalid input: Value must be a number or numeric string.');
+    }
+  
+    return new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency: currency,
+      minimumFractionDigits: car,
+      maximumFractionDigits: car,
+    }).format(numericValue);
+  }

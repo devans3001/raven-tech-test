@@ -47,6 +47,10 @@
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: #A7B1BC;
+  --first: #20252B;
+  --sec: #373B3F;
+  --red: #FF6838;
+  --green: #25C26E;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -112,6 +116,27 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #3b82f6 #f1f1f1;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #3b82f6;
+    border-radius: 4px;
+  }
+
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -121,4 +146,34 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+
+/* For WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px; /* Reduced width */
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: #25C26E; /* Track color */
+  border-radius: 20px;
+
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Thumb color */
+  background-color: green;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: red; /* Hover color */
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: var(--first) #f1f1f1; /* thumb and track color */
+  
 }

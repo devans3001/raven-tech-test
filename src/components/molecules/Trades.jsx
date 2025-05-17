@@ -1,6 +1,5 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import TradeBuy from "./TradeBuy";
-import TradeSell from "./TradeSell";
+import TradeChild from "./TradeChild";
 
 export default function Trades() {
   return (
@@ -27,8 +26,8 @@ export default function Trades() {
         </TabsTrigger>
       </TabsList>
 
-      <TradeBuy />
-      <TradeSell />
+      <TradeChild val="buy"/>
+      <TradeChild val="sell"/>
     </Tabs>
   );
 }

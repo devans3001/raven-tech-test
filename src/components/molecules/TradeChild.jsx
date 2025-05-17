@@ -5,12 +5,12 @@ import TradeBuyLimit from "./TradeBuyLimit";
 import TradeBuyMarket from "./TradeBuyMarket";
 import TradeBuyStopLimit from "./TradeBuyStopLimit";
 
-export default function TradeBuy() {
+export default function TradeChild({val}) {
   const options = ["Limit", "Market", "Stop-Limit"];
   const [activeTab, setActiveTab] = useState("Limit");
 
   return (
-    <TabsContent value="buy">
+    <TabsContent value={val}>
       <div className="flex items-center justify-between my-2 text-[#A7B1BC]">
         {options.map((item) => (
           <p

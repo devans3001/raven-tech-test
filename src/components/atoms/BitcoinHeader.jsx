@@ -2,10 +2,10 @@ import { useSearchParamsHook } from "@/hooks/useCustomParams";
 
 
 
-function BitcoinHeader({activeSymbol,options}) {
+function BitcoinHeader({activeDisplay,options}) {
    
 
-    const {getParam,setParam} = useSearchParamsHook();
+    const {setParam} = useSearchParamsHook();
  
   return (
     <div className="w-[40%] flex items-center justify-between my-1 text-[#A7B1BC]">
@@ -13,7 +13,7 @@ function BitcoinHeader({activeSymbol,options}) {
             <p
               key={item}
               className={`cursor-pointer px-3 py-1 rounded-[50px] transition-colors duration-200 ${
-                activeSymbol === item
+                activeDisplay === item
                   ? "bg-[#353945] text-white"
                   : "hover:text-white"
               }`}

@@ -8,30 +8,36 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import { useSearchParamsHook } from "@/hooks/useCustomParams";
 import BitcoinCommandItem from "./BitcoinCommandItem";
 import BitcoinHeader from "./BitcoinHeader";
 import FullScreenLoader from "../molecules/MyLoader";
-import { useGetCoins } from "@/lib/service";
+import { useCustomCoin } from "@/hooks/useCustomCoin";
+import { useGetCoins, useGetCoinsBySymbol } from "@/lib/service";
+import { useSearchParamsHook } from "@/hooks/useCustomParams";
 
 export default function BitcoinDropdownContent() {
   const options = ["all", "btc", "usdt"];
-  const { getParam } = useSearchParamsHook();
+    const { getParam } = useSearchParamsHook();
+  
+    const activeDisplay = getParam("display") || options[0];
 
-  const activeSymbol = getParam("display") || options[0];
-  const { data, isPending } = useGetCoins(activeSymbol);
+
+  const { data:coins, isPending } = useGetCoins();
+  const { data:coin, isPending:isLoading } = useGetCoinsBySymbol(activeDisplay !== "all" && activeDisplay);
+
+  const data = activeDisplay === "all" ? coins : coin;
 
   // if (isPending) return <FullScreenLoader/>
 
   return (
-    <Command className="rounded-lg border shadow-md md:min-w-[450px] bg-[var(--first)] p-2" >
+    <Command className="rounded-lg border shadow-md md:min-w-[450px] bg-[var(--first)] p-2">
       {/* <CommandGroup heading="Select Market" className={"text-white"}> */}
       <CommandInput placeholder="Type a search..." className={"text-white"} />
       {/* </CommandGroup> */}
       <CommandSeparator className={"bg-[#394047]"} />
 
       <CommandGroup>
-        <BitcoinHeader options={options} activeSymbol={activeSymbol} />
+        <BitcoinHeader options={options} activeDisplay={activeDisplay} />
       </CommandGroup>
       <CommandSeparator className={"bg-[#394047]"} />
 
@@ -41,7 +47,7 @@ export default function BitcoinDropdownContent() {
         </CommandEmpty>
 
         <CommandGroup heading="" className={""}>
-          {isPending ? (
+          {isPending || isLoading ? (
             <FullScreenLoader />
           ) : (
             data?.map((ele) => <BitcoinCommandItem key={ele.name} ele={ele} />)

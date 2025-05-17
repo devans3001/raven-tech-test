@@ -1,13 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCoin } from "./actions";
+import { getCoin, getCoinBySymbol } from "./actions";
 
 
 
 
-export function useGetCoins(id) {
+export function useGetCoins() {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["coins"],
+    queryFn: getCoin,
+  });
+
+  return { isPending:isLoading, error, data };
+}
+
+
+export function useGetCoinsBySymbol(id) {
   const { isLoading, error, data } = useQuery({
     queryKey: ["coins",id],
-    queryFn: ()=>getCoin(id),
+    queryFn: ()=>getCoinBySymbol(id),
     enabled: !!id,
   });
 

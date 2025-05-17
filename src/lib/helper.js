@@ -30,3 +30,16 @@ export const formatNumber = (input) => {
       maximumFractionDigits: car,
     }).format(numericValue);
   }
+
+
+  export function checkNumberSign(num) {
+    const val = typeof num === 'string' ? parseFloat(num) : num;
+    
+    if (isNaN(val)) {
+        return 'invalid';
+    }
+    
+    if (val > 0) return 'positive';
+    if (val < 0) return 'negative';
+    // return 'zero';
+}

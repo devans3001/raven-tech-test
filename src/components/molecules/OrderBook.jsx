@@ -19,10 +19,8 @@ import { useEffect, useState } from "react";
 
 function OrderBook() {
     const [lol,setLol] = useState(0)
-    console.log(lol)
 
   useEffect(() => {
-    console.log(window.innerHeight);
 
     setLol(window.innerHeight);
 

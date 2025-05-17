@@ -2,20 +2,24 @@ import Image from "next/image"
 import { CommandItem } from "../ui/command"
 import { useSearchParamsHook } from "@/hooks/useCustomParams";
 
-import bit from "@/assets/bitcoin.png";
-import { formatMoney, formatNumber } from "@/lib/helper";
+import { formatMoney } from "@/lib/helper";
+import { DialogClose,DialogTitle } from "../ui/dialog";
 
 
 function BitcoinCommandItem({ele}) {
-const {name,image,current_price,ath_change_percentage} = ele
+const {name,image,current_price,ath_change_percentage,symbol} = ele
 
-    // console.log(formatMoney("12345678",0))
     const {setParam} = useSearchParamsHook();
       function hanldeSelect(item) {
-        setParam("selectedSymbol", item);
+        setParam("symbol", item);
       }
+
+
   return (
-    <CommandItem onSelect={() => hanldeSelect(name)} className={"flex justify-between gap-5"}>
+    <DialogClose className=" w-full">
+
+{/* <DialogTitle></DialogTitle> */}
+    <CommandItem onSelect={() => hanldeSelect(symbol)} className={"flex justify-between gap-5 "}>
     <div className="flex gap-3 py-1">
       <Image src={image} alt="" width={30} height={25} />
       <p>{name}</p>
@@ -28,6 +32,8 @@ const {name,image,current_price,ath_change_percentage} = ele
       {`${ath_change_percentage}%`}
     </div>
     </CommandItem>
+    </DialogClose>
+
   )
 }
 export default BitcoinCommandItem

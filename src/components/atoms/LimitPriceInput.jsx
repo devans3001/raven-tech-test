@@ -32,7 +32,6 @@ export default function LimitPriceInput({label,tip,isSelect}) {
   const handleChange = (e) => {
     const value = e.target.value;
 
-    console.log(price);
     setPrice(formatNumber(value));
   };
 

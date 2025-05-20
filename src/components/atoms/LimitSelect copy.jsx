@@ -9,22 +9,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useFormContext } from "@/hooks/useFormLimitBuy";
 
-export function LimitSelect({ label, arr,name }) {
-  const { updateFormData } = useFormContext();
-
-  const handleValueChange = (value) => {
-    updateFormData(name, value);
-  };
+export function LimitSelect({ label, arr }) {
   return (
-    <Select onValueChange={handleValueChange}>
+    <Select className=" ">
       <SelectTrigger className="text-xs border-none border-0 focus:border-none">
         <SelectValue placeholder={label} className="text-sm" />
       </SelectTrigger>
       <SelectContent className="bg-[#1C2127] border-none border-0 focus:border-none text-white">
         <SelectGroup>
-         
+          {/* <SelectLabel>Fruits</SelectLabel> */}
           {arr?.map((item, idx) => {
             if (item.flag) {
               return (

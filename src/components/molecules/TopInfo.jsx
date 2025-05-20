@@ -1,12 +1,19 @@
 "use client";
 import { ChartColumnIncreasing, Clock12, MoveDown, MoveUp } from "lucide-react";
 import { BitcoinIcon } from "../atoms/BitcoinIcon";
-import { useCustomCoin } from "@/hooks/useCustomCoin";
+import { useCoins } from "@/hooks/useCoinsProvider";
 import { checkNumberSign, formatMoney } from "@/lib/helper";
 import { Skeleton } from "../ui/skeleton";
+import { useCustomCoin } from "@/hooks/useCustomCoin";
 
 function TopInfo() {
-  const { data, isPending } = useCustomCoin();
+
+  const {activeSymbol} = useCustomCoin()
+  const { data:coins, isPending } = useCoins();
+
+
+const data = coins?.find((coin) => coin.symbol === activeSymbol) || {};
+  
 
   const { current_price, high_24h, low_24h, total_volume, price_change_24h } =
     data;
@@ -56,7 +63,7 @@ export default TopInfo;
 function Changes({ ch }) {
   const num = checkNumberSign(ch);
 
-  console.log(num);
+  // console.log(num);
 
   return (
     <div className="flex flex-col gap-1 items-center text-[.7em] font-thin">

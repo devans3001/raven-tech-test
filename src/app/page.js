@@ -1,31 +1,19 @@
-"use client";
-import Footer from "@/components/molecules/Footer";
-import Order from "@/components/molecules/Order";
-import TopInfo from "@/components/molecules/TopInfo";
-import Trades from "@/components/molecules/Trades";
-import "@/styles/main/main.css";
-import { ToastContainer } from "react-toast";
-// import DataQueryProvider from "./DataQueryProvider";
+'use client'
+
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
-  return (
-    <>
-    {/* <DataQueryProvider> */}
+  const router = useRouter()
 
-        <div className="container">
-          <TopInfo />
+  useEffect(() => {
+    const hash = typeof window !== "undefined" && localStorage.getItem("user_hash")
+    if (hash) {
+      router.replace("/dashboard")
+    } else {
+      router.replace("/auth")
+    }
+  }, [router])
 
-          <div className="grid-container">
-            <div className="candle"></div>
-            <Order />
-            <Trades />
-          </div>
-          <div className="bottom"></div>
-        </div>
-        <ToastContainer />
-
-        <Footer />
-    {/* </DataQueryProvider> */}
-    </>
-  );
+  return null // or a loading spinner while redirecting
 }

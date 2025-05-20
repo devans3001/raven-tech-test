@@ -2,9 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@/styles/base.css";
 import "flag-icons/css/flag-icons.min.css";
-import Navbar from "@/components/molecules/Navbar";
-import Footer from "@/components/molecules/Footer";
-import { ToastContainer } from "react-toast";
+
 import DataQueryProvider from "./DataQueryProvider";
 
 const geistSans = Geist({
@@ -28,7 +26,6 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-full overflow-x-hidden`}
       >
-          <Navbar />
           <DataQueryProvider>
 
           {children}

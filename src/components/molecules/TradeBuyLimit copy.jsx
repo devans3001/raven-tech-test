@@ -5,53 +5,31 @@ import { LimitSelect } from "../atoms/LimitSelect";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
-import { FormProvider, useFormContext } from "@/hooks/useFormLimitBuy";
-import { useLocalStorageState } from "@/hooks/useLocalStorageState";
-import { formatMoney } from "@/lib/helper";
 
 function TradeBuyLimit() {
-
-  const [recentTrades, setRecentTrades] = useLocalStorageState("recentTrades", []);
-  const {formData} = useFormContext()
-  function inSubmit(e){
-    e.preventDefault()
-
-    console.log(formData)
-  }
-
-  const price = parseFloat(formData['price'])
-  const amount = parseFloat(formData['amount'])
-
-  const total = (price *amount).toFixed(2)
   return (
-   
-
     <div className="mt-2 ">
-      <form onSubmit={inSubmit}>
       <ScrollArea className="h-[60dvh] ">
         <div className="space-y-4">
           <div className="space-y-3">
             <LimitPriceInput
               label="Limit price"
-              name={"price"}
               tip="Set the maximum price you're willing to pay."
             />
             <LimitPriceInput
               label="Amount"
-              name="amount"
               tip="Enter the amount you want to trade."
             />
             <LimitPriceInput
               label="Type"
-              name="type"
               tip="This is the total cost of your trade."
               isSelect={"true"}
             />
 
-            <LimitCheckBox name="postOnly"/>
+            <LimitCheckBox />
             <div className="flex items-center justify-between text-[#A7B1BC] text-xs">
               <p>Total</p>
-              <p>{formatMoney(total)}</p>
+              <p>0.00</p>
             </div>
 
             <BitButton/>
@@ -59,12 +37,10 @@ function TradeBuyLimit() {
 
           <Separator className={"bg-[#394047]"} />
 
-         <SomeTotalComp total={total}/>
+         <SomeTotalComp/>
         </div>
       </ScrollArea>
-      </form>
     </div>
-
   );
 }
 export default TradeBuyLimit;

@@ -4,6 +4,7 @@ import { TabsContent } from "../ui/tabs";
 import TradeBuyLimit from "./TradeBuyLimit";
 import TradeBuyMarket from "./TradeBuyMarket";
 import TradeBuyStopLimit from "./TradeBuyStopLimit";
+import { FormProvider } from "@/hooks/useFormLimitBuy";
 
 export default function TradeChild({val}) {
   const options = ["Limit", "Market", "Stop-Limit"];
@@ -26,10 +27,12 @@ export default function TradeChild({val}) {
           </p>
         ))}
       </div>
-
+      <FormProvider>
       {activeTab === "Limit" && <TradeBuyLimit />}
       {activeTab === "Market" && <TradeBuyMarket />}
       {activeTab === "Stop-Limit" && <TradeBuyStopLimit />}
+      </FormProvider>
+
     </TabsContent>
   );
 }

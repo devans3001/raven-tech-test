@@ -11,14 +11,18 @@ const {name,image,current_price,ath_change_percentage,symbol} = ele
 
     const {setParam} = useSearchParamsHook();
       function hanldeSelect(item) {
-        setParam("symbol", item);
+        // setParam("symbol", item);
+
+
+        setTimeout(() => {
+          setParam("symbol", item);
+          }, 200); // adjust if needed
       }
 
 
   return (
     <DialogClose className=" w-full">
 
-{/* <DialogTitle></DialogTitle> */}
     <CommandItem onSelect={() => hanldeSelect(symbol)} className={"flex justify-between gap-5 "}>
     <div className="flex gap-3 py-1">
       <Image src={image} alt="" width={30} height={25} />

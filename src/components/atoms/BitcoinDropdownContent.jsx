@@ -14,17 +14,20 @@ import FullScreenLoader from "../molecules/MyLoader";
 import { useCustomCoin } from "@/hooks/useCustomCoin";
 import { useGetCoins, useGetCoinsBySymbol } from "@/lib/service";
 import { useSearchParamsHook } from "@/hooks/useCustomParams";
+import { useCoins } from "@/hooks/useCoinsProvider";
 
 export default function BitcoinDropdownContent() {
   const options = ["all", "btc", "usdt"];
     const { getParam } = useSearchParamsHook();
   
     const activeDisplay = getParam("display") || options[0];
+    const {data:coins,isPending} = useCoins()
 
 
-  const { data:coins, isPending } = useGetCoins();
-  const { data:coin, isPending:isLoading } = useGetCoinsBySymbol(activeDisplay !== "all" && activeDisplay);
+  // const { data:coins, isPending } = useGetCoins();
+  // const { data:coin, isPending:isLoading } = useGetCoinsBySymbol(activeDisplay !== "all" && activeDisplay);
 
+  const coin = coins.filter((coin) => coin.symbol === activeDisplay);
   const data = activeDisplay === "all" ? coins : coin;
 
   // if (isPending) return <FullScreenLoader/>
@@ -47,7 +50,7 @@ export default function BitcoinDropdownContent() {
         </CommandEmpty>
 
         <CommandGroup heading="" className={""}>
-          {isPending || isLoading ? (
+          {isPending  ? (
             <FullScreenLoader />
           ) : (
             data?.map((ele) => <BitcoinCommandItem key={ele.name} ele={ele} />)

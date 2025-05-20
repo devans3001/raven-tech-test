@@ -1,10 +1,9 @@
-import BitcoinDropdownContent from "@/components/atoms/BitcoinDropdownContent"
-import FullScreenLoader from "@/components/molecules/MyLoader"
 
+import OrderBook from "./Hi.jsx"
 
 function Test() {
   return (
-    <FullScreenLoader/>
+    <OrderBook/>
   )
 }
 export default Test

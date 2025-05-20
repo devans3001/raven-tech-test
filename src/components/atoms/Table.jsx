@@ -38,15 +38,21 @@ export function Table({ children, className }) {
     return <div className={className}>{children}</div>;
   };
   
-  Table.Row = function TableRow({ children, className }) {
+  Table.Row = function TableRow({ children, className, variant }) {
     return (
       <div
-        className={clsx("grid grid-cols-3 gap-4 px-2 py-1 text-white", className)}
+        className={clsx(
+          "grid grid-cols-3 gap-4 px-2 py-1 text-white",
+          variant === "ask" && "bg-[#421e1e]/50 text-red-400", // red
+          variant === "bid" && "bg-[#1e3e1e]/50 text-green-400", // green
+          className
+        )}
       >
         {children}
       </div>
     );
   };
+  
   
   
   Table.Cell = function TableCell({ children, className }) {

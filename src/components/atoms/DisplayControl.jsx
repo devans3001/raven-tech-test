@@ -5,24 +5,27 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { BarChart3, List, Rows3 } from "lucide-react";
+import { useSearchParamsHook } from "@/hooks/useCustomParams";
 
 export default function DensityControls({
   layout = "compact",
   onLayoutChange,
-  limit = "10",
-  onLimitChange
+  // limit = "10",
+  // onLimitChange
 }) {
   const [selectedLayout, setSelectedLayout] = useState(layout);
-  const [selectedLimit, setSelectedLimit] = useState(limit);
 
+  const {getParam,setParam} = useSearchParamsHook()
+
+  const limit = getParam("limit") || "6"
   const handleLayoutChange = (value) => {
     setSelectedLayout(value);
     onLayoutChange?.(value);
   };
 
   const handleLimitChange = (value) => {
-    setSelectedLimit(value);
-    onLimitChange?.(value);
+    setParam("limit",value.toString());
+    // onLimitChange?.(value);
   };
 
   return (
@@ -58,12 +61,12 @@ export default function DensityControls({
       </ToggleGroup>
 
       {/* Rows Per Page Selector */}
-      <Select value={selectedLimit} onValueChange={handleLimitChange}>
+      <Select value={limit} onValueChange={handleLimitChange}>
         <SelectTrigger className="w-[80px] bg-[#1E2023] border-none text-white text-sm">
           <SelectValue placeholder="10" />
         </SelectTrigger>
         <SelectContent className="bg-[#1E2023] text-white border border-[#333]">
-          {[10, 25, 50, 100].map((num) => (
+          {[3, 5, 6, 10].map((num) => (
             <SelectItem key={num} value={String(num)} className="hover:bg-[#272A2E]">
               {num}
             </SelectItem>

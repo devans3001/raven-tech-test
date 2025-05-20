@@ -4,6 +4,7 @@ import Link from "next/link";
 import AvatarIcon from "./Avatar";
 import { RxDividerVertical } from "react-icons/rx";
 import { Separator } from "../ui/separator";
+// import Link from "next/navigation"
 
 function Navbar() {
   const links = [
@@ -13,8 +14,11 @@ function Navbar() {
   ];
   return (
     <div className="w-screen flex items-center justify-around py-3 px-5 gap-5 bg-[#32383F]">
+
       <div className="relative">
+        <Link href="/">
         <Image src={logo} alt="logo" width={120} height={120} />
+        </Link>
       </div>
       {/* <RxDividerVertical  className="text-[#A7B1BC] h-[100%]"/> */}
       <Separator orientation="vertical" className={"h-full  bg-blue-500"}/>

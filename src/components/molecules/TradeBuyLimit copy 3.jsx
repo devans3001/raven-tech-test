@@ -6,23 +6,16 @@ import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 import { FormProvider, useFormContext } from "@/hooks/useFormLimitBuy";
-import { useLocalStorageState } from "@/hooks/useLocalStorageState";
-import { formatMoney } from "@/lib/helper";
 
 function TradeBuyLimit() {
 
-  const [recentTrades, setRecentTrades] = useLocalStorageState("recentTrades", []);
+
   const {formData} = useFormContext()
   function inSubmit(e){
     e.preventDefault()
 
     console.log(formData)
   }
-
-  const price = parseFloat(formData['price'])
-  const amount = parseFloat(formData['amount'])
-
-  const total = (price *amount).toFixed(2)
   return (
    
 
@@ -51,7 +44,7 @@ function TradeBuyLimit() {
             <LimitCheckBox name="postOnly"/>
             <div className="flex items-center justify-between text-[#A7B1BC] text-xs">
               <p>Total</p>
-              <p>{formatMoney(total)}</p>
+              <p>0.00</p>
             </div>
 
             <BitButton/>
@@ -59,7 +52,7 @@ function TradeBuyLimit() {
 
           <Separator className={"bg-[#394047]"} />
 
-         <SomeTotalComp total={total}/>
+         <SomeTotalComp/>
         </div>
       </ScrollArea>
       </form>

@@ -25,3 +25,16 @@ export async function getCoinBySymbol(id) {
     throw new Error("Failed to fetch data", error);
   }
 }
+
+
+export async function fetchOrderBook(symbol) {
+  try {
+    const res = await fetch(`https://api.binance.com/api/v3/depth?symbol=${symbol}&limit=15`);
+    if (!res.ok) throw new Error("Failed to fetch order book");
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error("Order book error:", err);
+    return null;
+  }
+}

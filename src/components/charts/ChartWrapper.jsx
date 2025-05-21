@@ -3,7 +3,8 @@ import {
   createChart,
   CrosshairMode,
   ColorType,
-  CandlestickSeries
+  CandlestickSeries,
+  HistogramSeries 
 } from "lightweight-charts";
 import { useEffect, useRef, useState } from "react";
 
@@ -13,13 +14,19 @@ export default function ChartWrapper({ data,sym }) {
    
   const chartRef = useRef(null);
   const containerRef = useRef();
+  const priceLineRef = useRef(null);
+
 
   const [legend, setLegend] = useState(null);
  
 
   useEffect(() => {
     if (!data || !containerRef.current) return;
+// Remove old price line if it exists
 
+  
+  // Get last candle
+  const lastCandle = data[data.length - 1];
   
     const chart = createChart(containerRef.current, {
       width: containerRef.current.clientWidth,
@@ -27,6 +34,11 @@ export default function ChartWrapper({ data,sym }) {
       layout: {
         background: { type: ColorType.Solid, color: "#20252B" },
         textColor: "#D1D5DB",
+        panes: {
+            separatorColor: '#dd0',
+            separatorHoverColor: '#888',
+            enableResize: false,
+          },
       },
       grid: {
         vertLines: { color: "#2A2E39" },
@@ -42,6 +54,7 @@ export default function ChartWrapper({ data,sym }) {
         borderColor: "#485c7b",
         timeVisible: true,
       },
+     
     });
 
     
@@ -55,7 +68,49 @@ export default function ChartWrapper({ data,sym }) {
         wickDownColor: '#ef5350',
       });
 
-      candlestickSeries.setData(data);
+      const volumeSeries = chart.addSeries(HistogramSeries, {
+        priceFormat: { type: 'volume' },
+        color: '#26a69a',
+        priceScaleId: '',
+        overlay:false,
+        scaleMargins: {
+          top: 0.8,
+          bottom: 0,
+        },
+        // pane:1
+      },1);
+
+      if (priceLineRef.current) {
+        candlestickSeries.removePriceLine(priceLineRef.current);
+      }
+
+      priceLineRef.current = candlestickSeries.createPriceLine({
+        price: lastCandle.close,
+        color: lastCandle.close >= lastCandle.open ? '#0ECB81' : '#F6465D',
+        lineWidth: 2,
+        lineStyle: 0, // solid
+        axisLabelVisible: true,
+        title: 'Last Price',
+      });
+  
+
+      candlestickSeries.setData(data.map(d => ({
+        time: d.time,
+        open: d.open,
+        high: d.high,
+        low: d.low,
+        close: d.close,
+      })));
+
+      volumeSeries.setData(data.map(d => ({
+        time: d.time,
+        value: d.volume,
+        color: d.close > d.open ? '#26a69a' : '#ef5350',
+      })));
+
+    //   chart.panes()[0].setHeight(240); 
+    // chart.panes()[1].setHeight(160); 
+
     chart.timeScale().fitContent();
 
      chart.subscribeCrosshairMove(param => {

@@ -52,6 +52,7 @@ export async function fetchChartKline(symbol,int){
       high: parseFloat(d[2]),
       low: parseFloat(d[3]),
       close: parseFloat(d[4]),
+      volume: parseFloat(d[5]),
     }));
 
   } catch (err) {

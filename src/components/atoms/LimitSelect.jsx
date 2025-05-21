@@ -18,7 +18,7 @@ export function LimitSelect({ label, arr,name }) {
     updateFormData(name, value);
   };
   return (
-    <Select onValueChange={handleValueChange}>
+    <Select  onValueChange={handleValueChange}>
       <SelectTrigger className="text-xs border-none border-0 focus:border-none">
         <SelectValue placeholder={label} className="text-sm" />
       </SelectTrigger>

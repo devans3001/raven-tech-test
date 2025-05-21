@@ -6,13 +6,14 @@ import { ChevronDown } from "lucide-react";
 import BitcoinDropdownContent from "./BitcoinDropdownContent";
 
 import { Skeleton } from "../ui/skeleton";
+import { formatMoney } from "@/lib/helper";
 
-export function BitcoinIcon({data,isPending}) {
+export function BitcoinIcon({data,isPending,price}) {
 
   
   if (isPending)
     return (
-  <div className="flex items-center space-x-4">
+  <div className="flex items-center space-x-4 max-md:justify-center">
         <Skeleton className="h-12 w-12 rounded-full" />
         <div className="space-y-2">
           <Skeleton className="h-3 w-[75px]" />
@@ -25,6 +26,8 @@ export function BitcoinIcon({data,isPending}) {
     <>
       <Dialog>
         <DialogTrigger asChild className="border-0 border-none focus:border-0">
+          <div className="flex gap-6 items-center">
+
           <Button
             variant="outline"
             className={
@@ -35,6 +38,15 @@ export function BitcoinIcon({data,isPending}) {
             <p className="text-xl">{data?.name.toUpperCase()}</p>
             <ChevronDown />
           </Button>
+             {/* {isPending ? (
+                    <Skeleton className="h-4 w-[100px]" />
+                  ) : ( */}
+                    <div className="text-[#00C076]">
+                      {formatMoney(price.toString())}
+                    </div>
+                  {/* )} */}
+          </div>
+
         </DialogTrigger>
         <DialogContent className="w-fit bg-transparent border-0 border-none  shadow-md">
           <DialogTitle></DialogTitle>

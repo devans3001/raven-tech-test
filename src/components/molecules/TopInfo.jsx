@@ -18,19 +18,13 @@ const data = coins?.find((coin) => coin.symbol === activeSymbol) || {};
   const { current_price, high_24h, low_24h, total_volume, price_change_24h } =
     data;
   return (
-    <div className="topInfo bg-[#20252B] flex items-center px-4 py-3 w-[100dvw]">
+    <div className="topInfo bg-[#21262C]  flex md:items-center gap-4 flex-col md:flex-row px-4 py-3 w-[100dvw]">
       <div>
-        <BitcoinIcon data={data} isPending={isPending} />
+        <BitcoinIcon data={data} isPending={isPending} price={current_price}/>
       </div>
 
       <div className="flex-1 flex items-center justify-around">
-        {isPending ? (
-          <Skeleton className="h-4 w-[100px]" />
-        ) : (
-          <div className="text-[#00C076]">
-            {formatMoney(current_price.toString())}
-          </div>
-        )}
+     
 
         {isPending ? (
           <Skeleton className="h-4 w-[100px]" />
@@ -66,9 +60,9 @@ function Changes({ ch }) {
   // console.log(num);
 
   return (
-    <div className="flex flex-col gap-1 items-center text-[.7em] font-thin">
+    <div className="flex flex-col gap-1 items-center text-[.7em] font-lg">
       <p className="flex gap-1 text-white items-center ">
-        <Clock12 size={12} />
+        <Clock12 size={15} />
         <span>24h change</span>
       </p>
       <p
@@ -85,7 +79,7 @@ function High({ hi }) {
   return (
     <div className="flex flex-col gap-1 items-center text-[.7em] font-thin ">
       <p className="flex gap-1 text-white items-center ">
-        <MoveUp size={12} />
+        <MoveUp size={15} />
         <span className="text-[#A7B1BC]">24h high</span>
       </p>
       <p className="text-white">{hi}%</p>
@@ -96,7 +90,7 @@ function Low({ lo }) {
   return (
     <div className="flex flex-col gap-1 items-center text-[.7em] font-thin ">
       <p className="flex gap-1 text-white items-center ">
-        <MoveDown size={12} />
+        <MoveDown size={15} />
         <span className="text-[#A7B1BC]">24h low</span>
       </p>
       <p className="text-white">{lo}</p>
@@ -107,7 +101,7 @@ function Volume({vo}) {
   return (
     <div className="flex flex-col gap-1 items-center text-[.7em] font-thin ">
       <p className="flex gap-1 text-white items-center ">
-        <ChartColumnIncreasing size={12} />
+        <ChartColumnIncreasing size={15} />
         <span className="text-[#A7B1BC]">24h volume</span>
       </p>
       <p className="text-white">{vo}</p>

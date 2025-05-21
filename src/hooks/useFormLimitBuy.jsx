@@ -4,12 +4,13 @@ import { createContext, useContext, useState } from 'react';
 const FormContext = createContext();
 
 export function FormProvider({ children }) {
-  const [formData, setFormData] = useState({
-    price:"0",
-    amount:"0",
+  const def = {
+    price:"0.00",
+    amount:"0.00",
     type:"good",
     postOnly:false
-  });
+  }
+  const [formData, setFormData] = useState(def);
 
   const updateFormData = (name, value) => {
     setFormData(prev => ({
@@ -18,8 +19,12 @@ export function FormProvider({ children }) {
     }));
   };
 
+  const reset = ()=>{
+    setFormData(def)
+  }
+
   return (
-    <FormContext.Provider value={{ formData, updateFormData }}>
+    <FormContext.Provider value={{ formData, updateFormData,reset }}>
       {children}
     </FormContext.Provider>
   );

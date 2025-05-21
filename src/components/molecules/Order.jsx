@@ -6,7 +6,7 @@ export default function Order() {
   return (
     <Tabs
       defaultValue="orderbook"
-      className="  p-3 rounded-xl orderbook h-full relative"
+      className="  p-3 rounded-xl orderbook h-full relative bg-blue-500"
     >
       <TabsList className="grid w-full grid-cols-2 bg-[#1C2127]">
         <TabsTrigger

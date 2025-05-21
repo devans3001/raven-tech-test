@@ -5,12 +5,10 @@
   grid-template-areas: "candle candle candle orderbook trades" "candle candle candle orderbook trades" "candle candle candle orderbook trades" "candle candle candle orderbook trades";
   gap: 8px;
   height: 80dvh;
-  min-height: 60dvh;
   width: 100vw;
   padding: 10px;
 }
 .container .grid-container .candle {
-  background-color: red;
   grid-area: candle;
   border-radius: 20px;
 }

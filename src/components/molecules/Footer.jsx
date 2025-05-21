@@ -4,12 +4,12 @@ import { TabsContent } from "@radix-ui/react-tabs";
 function Footer() {
   const tabArr = ["open_order", "position", "order_history", "trade_history"];
   return (
-    <div className="max-w-screen h-screen mt-5 px-2">
+    <div className="max-w-screen h-screen mt-3 px-2">
       <Tabs
         defaultValue="open_order"
-        className="  p-3 rounded-xl orderbook h-full relative"
+        className="bg-[#21262C]  p-3 rounded-xl orderbook h-full relative"
       >
-        <TabsList className="grid w-[60%] grid-cols-4 bg-[#1C2127]">
+        <TabsList className="max-md:h-20 grid md:w-[60%] md:grid-cols-4 w-full grid-cols-2   gap-2 bg-[#1C2127]">
           {tabArr.map((ele) => {
             const item = ele.split("_").join(" ");
 
@@ -29,17 +29,17 @@ function Footer() {
         {/* <OrderBook/>
       <RecentTrade/> */}
 
-        <TabsContent value="open_order" className="h-full">
+       { tabArr.map(ele => (<TabsContent value={ele} key={ele} className="h-full">
             <div className="h-full flex items-center justify-center text-center flex-col">
             <h1 className="text-3xl">
-                No Open Order
+                No {ele.split("_").map(letter=>(letter.slice(0,1).toUpperCase()+letter.slice(1))).join(" ")}
             </h1>
             <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br />
                  Quaerat fugiat qui itaque dicta deleniti. Suscipit.
             </p>
             </div>
-        </TabsContent>
+        </TabsContent>))}
       </Tabs>
     </div>
   );

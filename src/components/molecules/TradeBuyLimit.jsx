@@ -10,92 +10,102 @@ import { useLocalStorageState } from "@/hooks/useLocalStorageState";
 import { formatMoney } from "@/lib/helper";
 
 function TradeBuyLimit() {
+  const [recentTrades, setRecentTrades] = useLocalStorageState(
+    "recentTrades",
+    []
+  );
+  const { formData, reset } = useFormContext();
+  const price = parseFloat(formData["price"]);
+  const amount = parseFloat(formData["amount"]);
 
-  const [recentTrades, setRecentTrades] = useLocalStorageState("recentTrades", []);
-  const {formData} = useFormContext()
-  function inSubmit(e){
-    e.preventDefault()
+  const total = (price * amount).toFixed(2);
+  function inSubmit(e) {
+    e.preventDefault();
 
-    console.log(formData)
+    console.log(formData);
+
+    const newOrder = {
+      ...formData,
+      total,
+      timestamp: Date.now(),
+    };
+
+    setRecentTrades((prev) => [newOrder, ...prev.slice(0, 10)]);
+
+    reset();
   }
 
-  const price = parseFloat(formData['price'])
-  const amount = parseFloat(formData['amount'])
-
-  const total = (price *amount).toFixed(2)
   return (
-   
-
     <div className="mt-2 ">
       <form onSubmit={inSubmit}>
-      <ScrollArea className="h-[60dvh] ">
-        <div className="space-y-4">
-          <div className="space-y-3">
-            <LimitPriceInput
-              label="Limit price"
-              name={"price"}
-              tip="Set the maximum price you're willing to pay."
-            />
-            <LimitPriceInput
-              label="Amount"
-              name="amount"
-              tip="Enter the amount you want to trade."
-            />
-            <LimitPriceInput
-              label="Type"
-              name="type"
-              tip="This is the total cost of your trade."
-              isSelect={"true"}
-            />
+        <ScrollArea className="h-[60dvh] overflow-y-hidden">
+          <div className="space-y-4">
+            <div className="space-y-3">
+              <LimitPriceInput
+                label="Limit price"
+                name={"price"}
+                tip="Set the maximum price you're willing to pay."
+              />
+              <LimitPriceInput
+                label="Amount"
+                name="amount"
+                tip="Enter the amount you want to trade."
+              />
+              <LimitPriceInput
+                label="Type"
+                name="type"
+                tip="This is the total cost of your trade."
+                isSelect={"true"}
+              />
 
-            <LimitCheckBox name="postOnly"/>
-            <div className="flex items-center justify-between text-[#A7B1BC] text-xs">
-              <p>Total</p>
-              <p>{formatMoney(total)}</p>
+              <LimitCheckBox name="postOnly" />
+              <div className="flex items-center justify-between text-[#A7B1BC] text-xs">
+                <p>Total</p>
+                <p>{formatMoney(total)}</p>
+              </div>
+
+              <BitButton />
             </div>
 
-            <BitButton/>
+            <Separator className={"bg-[#394047]"} />
+
+            <SomeTotalComp total={total} />
           </div>
-
-          <Separator className={"bg-[#394047]"} />
-
-         <SomeTotalComp total={total}/>
-        </div>
-      </ScrollArea>
+        </ScrollArea>
       </form>
     </div>
-
   );
 }
 export default TradeBuyLimit;
 
-
-export function SomeTotalComp(){
-    return  <div className="space-y-4">
-    <div className="flex items-center justify-between">
+export function SomeTotalComp() {
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
         <p className="text-xs">
-            Total <br />
-            <span>0.00</span>
+          Total <br />
+          <span>0.00</span>
         </p>
-        <LimitSelect label="NGN" arr={coun}/>
-    </div>
-    <div className="flex items-center justify-between text-xs">
+        <LimitSelect label="NGN" arr={coun} />
+      </div>
+      <div className="flex items-center justify-between text-xs">
         <p className="">
-            Open Order <br />
-            <span>0.00</span>
+          Open Order <br />
+          <span>0.00</span>
         </p>
-       <p>
-        Available <br /> 0.00
-       </p>
+        <p>
+          Available <br /> 0.00
+        </p>
+      </div>
+      <Button className={"bg-[#2764FF]"}>Deposit</Button>
     </div>
-    <Button className={"bg-[#2764FF]"}>
-        Deposit
-    </Button>
-  </div>
+  );
 }
 
-export function BitButton(){
-    return <Button className="w-full bg-gradient-to-r from-[#483BEB] via-[#7847E1] to-[#DD568D]">
-    Buy BTC
-  </Button>
+export function BitButton() {
+  return (
+    <Button className="w-full bg-gradient-to-r from-[#483BEB] via-[#7847E1] to-[#DD568D]">
+      Buy BTC
+    </Button>
+  );
 }

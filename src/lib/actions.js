@@ -38,3 +38,24 @@ export async function fetchOrderBook(symbol) {
     return null;
   }
 }
+
+
+export async function fetchChartKline(symbol,int){
+  try {
+    const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${int}&limit=200`);
+    if (!res.ok) throw new Error("Failed to fetch chart klines");
+    const data = await res.json();
+
+    return data.map((d) => ({
+      time: d[0] / 1000,
+      open: parseFloat(d[1]),
+      high: parseFloat(d[2]),
+      low: parseFloat(d[3]),
+      close: parseFloat(d[4]),
+    }));
+
+  } catch (err) {
+    console.error("Chart Kline error:", err);
+    return null;
+  }
+}

@@ -16,7 +16,7 @@ import { goodArr } from "@/lib/fakeData";
 import { useFormContext } from "@/hooks/useFormLimitBuy";
 
 export default function LimitPriceInput({ label, tip, isSelect, name }) {
-  const { updateFormData } = useFormContext();
+  const {formData, updateFormData } = useFormContext();
   const [price, setPrice] = useState("0.00");
   const inputRef = useRef(null);
 
@@ -41,7 +41,7 @@ export default function LimitPriceInput({ label, tip, isSelect, name }) {
   const handleChange = (e) => {
     const value = e.target.value;
 
-    setPrice(formatNumberWithCommas(value));
+    setPrice(formatNumber(value));
     updateFormData(name, parseFormattedNumber(value));
   };
 
@@ -57,7 +57,7 @@ export default function LimitPriceInput({ label, tip, isSelect, name }) {
             type="text"
             ref={inputRef}
             className="bg-transparent text-right w-full text-white text-xs pr-10 focus-visible:ring-0 focus-visible:ring-offset-0 border-none focus:border-none"
-            value={price}
+            value={formData[name]}
             onChange={handleChange}
           />
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground pointer-events-none">

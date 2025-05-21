@@ -1,4 +1,5 @@
 .container {
+  // background:#21262C;
     .grid-container {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -10,14 +11,14 @@
         "candle candle candle orderbook trades"
         ;
       gap: 8px; // Added gap for better spacing
-      height: 80dvh; // Uncommented (recommended for proper grid sizing)
-      min-height: 60dvh; // Fallback for older browsers
+      height: 80dvh;
+      // min-height: 60dvh; 
       width: 100vw;
       padding: 10px;
       // background-color: aqua;
   
       .candle {
-        background-color: red;
+        // background-color: red;
         grid-area: candle;
         border-radius: 20px;
       }

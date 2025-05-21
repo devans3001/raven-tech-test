@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCoin, getCoinBySymbol,fetchOrderBook } from "./actions";
+import { getCoin, getCoinBySymbol,fetchOrderBook, fetchChartKline } from "./actions";
 
 
 
@@ -29,6 +29,15 @@ export function useOrderBook(id) {
     queryKey: ["order",id],
     queryFn: ()=>fetchOrderBook(id),
     enabled: !!id,
+  });
+
+  return { isPending:isLoading, error, data };
+}
+export function useChartKline(id,int) {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["candle",id,int],
+    queryFn: ()=>fetchChartKline(id,int),
+    enabled: !!id || !!int,
   });
 
   return { isPending:isLoading, error, data };

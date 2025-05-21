@@ -1,14 +1,17 @@
-import Navbar from "@/components/molecules/Navbar"
+import Footer from "@/components/molecules/Footer";
+import Navbar from "@/components/molecules/Navbar";
+import ProtectedRoute from "../auth/ProtectedRoute";
 
-
-function DashboardLayout({children}) {
+function DashboardLayout({ children }) {
   return (
-    <div
-    >
-          <Navbar />
+    <ProtectedRoute>
+      <div className="md:h-screen flex flex-col">
+        <Navbar />
 
-        {children}
-    </div>
-  )
+        <main className="flex-1">{children}</main>
+      </div>
+      <Footer />
+    </ProtectedRoute>
+  );
 }
-export default DashboardLayout
+export default DashboardLayout;

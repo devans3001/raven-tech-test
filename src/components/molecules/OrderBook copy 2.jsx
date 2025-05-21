@@ -22,11 +22,10 @@ function OrderBook() {
   const midPrice = 12323;
 
   return (
-    <TabsContent value="orderbook" className={"h-full gap-5 md:gap-0 scrollable-div relative flex flex-col "}>
-      {/* <ScrollArea> */}
-
+    <TabsContent value="orderbook" className={"h-full scrollable-div relative"}>
+      <BuySellButton/>
       <DensityControls />
-      <div className="fle flex flex-col justify-between md:h-full">
+      <div className="flex flex-col justify-between h-full">
         <Table>
           <Table.Header className="text-[#A7B1BC] text-right text-sm">
             <Table.Cell>Price (USDT)</Table.Cell>
@@ -71,9 +70,6 @@ function OrderBook() {
           )}
         </Table>
       </div>
-      <BuySellButton/>
-      {/* </ScrollArea> */}
-
     </TabsContent>
   );
 }

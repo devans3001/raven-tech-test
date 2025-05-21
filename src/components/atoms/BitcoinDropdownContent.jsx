@@ -11,8 +11,7 @@ import {
 import BitcoinCommandItem from "./BitcoinCommandItem";
 import BitcoinHeader from "./BitcoinHeader";
 import FullScreenLoader from "../molecules/MyLoader";
-import { useCustomCoin } from "@/hooks/useCustomCoin";
-import { useGetCoins, useGetCoinsBySymbol } from "@/lib/service";
+
 import { useSearchParamsHook } from "@/hooks/useCustomParams";
 import { useCoins } from "@/hooks/useCoinsProvider";
 
@@ -33,7 +32,7 @@ export default function BitcoinDropdownContent() {
   // if (isPending) return <FullScreenLoader/>
 
   return (
-    <Command className="rounded-lg border shadow-md md:min-w-[450px] bg-[var(--first)] p-2">
+    <Command className="rounded-lg border shadow-md md:min-w-[450px] bg-[var(--first)] p-2 max-md:w-[80dvw]">
       {/* <CommandGroup heading="Select Market" className={"text-white"}> */}
       <CommandInput placeholder="Type a search..." className={"text-white"} />
       {/* </CommandGroup> */}

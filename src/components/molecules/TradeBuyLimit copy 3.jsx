@@ -14,7 +14,6 @@ function TradeBuyLimit() {
   function inSubmit(e){
     e.preventDefault()
 
-    console.log(formData)
   }
   return (
    

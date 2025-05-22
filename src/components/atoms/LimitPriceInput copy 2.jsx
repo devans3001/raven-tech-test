@@ -10,13 +10,11 @@ import { LimitSelect } from "./LimitSelect";
 
 export default function LimitPriceInput({ label, tip, name,value,onChange,...props }) {
   
-  // console.log("limit input")
   const inputRef = useRef(null);
   const [displayValue, setDisplayValue] = useState(value || "0.00");
 
   useEffect(() => {
     const input = inputRef.current;
-    console.log("input",input)
     if (!input) return;
 
     const handleFocus = () => {
@@ -37,7 +35,6 @@ export default function LimitPriceInput({ label, tip, name,value,onChange,...pro
       onChange({ target: { value: "", name } });
       return;
     }
-    console.log("rawValue",rawValue)
     const formattedValue = formatNumber(rawValue);
     setDisplayValue(formattedValue);
     

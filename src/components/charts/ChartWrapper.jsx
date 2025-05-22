@@ -133,6 +133,7 @@ export default function ChartWrapper({ data,sym }) {
     const handleResize = () => {
       chart.applyOptions({
         width: containerRef.current.clientWidth,
+        height: containerRef.current.clientHeight,
       });
     };
 
@@ -144,8 +145,8 @@ export default function ChartWrapper({ data,sym }) {
   }, [data]);
 
   return (
-    <div className="flex-1 w-full  rounded-md overflow-hidden">
-         <div className="text-xs text-foreground px-2 py-1 flex items-center gap-6 bg-[var(--first)]">
+    <div className="flex-1 w-full max-md:h-[70dvh]  rounded-md overflow-hidden">
+         <div className="text-xs text-foreground px-2 py-1 flex items-center gap-3 md:gap-6 bg-[var(--first)]">
         <span className="font-bold">{sym.toUpperCase()}</span>
         {legend && (
           <>
@@ -153,12 +154,13 @@ export default function ChartWrapper({ data,sym }) {
             <span>H <span className="text-[#00C076]">{legend.h}</span></span>
             <span>L <span className="text-[#00C076]">{legend.l}</span></span>
             <span>C <span className="text-[#00C076]">{legend.c}</span></span>
-            <span>Change: <span className="text-[#00C076]">{legend.change}%</span></span>
-            <span>Amplitude: <span className="text-[#00C076]">{legend.amplitude}%</span></span>
+            <span>Ch: <span className="text-[#00C076]">{legend.change}%</span></span>
+            <span>Amp: <span className="text-[#00C076]">{legend.amplitude}%</span></span>
           </>
         )}
       </div>
-      <div ref={containerRef}  className="h-full w-full"/>
+
+      <div ref={containerRef}  className="h-full w-full "/>
     </div>
   );
 }

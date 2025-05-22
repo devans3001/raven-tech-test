@@ -22,43 +22,42 @@ function Navbar() {
   const links = [
     { 
       name: "Exchange", 
-      href: "/exchange",
+      href: "/dashboard/exchange",
       icon: ArrowRightLeft  // Represents trading/swapping
     },
     { 
       name: "Wallets", 
-      href: "/wallets",
+      href: "/dashboard/wallet",
       icon: Wallet  // Direct wallet representation
     },
     { 
       name: "Shaft Hub", 
-      href: "/shaft-hub",
+      href: "/dashboard/shaft",
       icon: Bitcoin  // Assuming it's crypto-related
     },
-    // Additional crypto-related sections
     { 
       name: "Market", 
-      href: "/market",
+      href: "/dashboard/market",
       icon: LineChart  // For price charts/market data
     },
     { 
       name: "NFTs", 
-      href: "/nfts",
+      href: "/dashboard/nfts",
       icon: Gem  // Represents digital collectibles
     },
     { 
       name: "DeFi", 
-      href: "/defi",
+      href: "/dashboard/defi",
       icon: Banknote  // Represents decentralized finance
     },
     { 
       name: "Tokens", 
-      href: "/tokens",
+      href: "/dashboard/tokens",
       icon: Coins  // For crypto tokens
     },
     { 
       name: "Staking", 
-      href: "/staking",
+      href: "/dashboard/staking",
       icon: Sparkles  // Represents earning rewards
     }
   ];
@@ -70,7 +69,7 @@ function Navbar() {
     <div className="w-screen flex items-center justify-around max-md:justify-between py-3 px-5 gap-5 bg-[#1C2127]">
 
       <div className="relative">
-        <Link href="/">
+        <Link href="/dashboard">
         <Image src={logo} alt="logo" width={fig} height={fig} />
         </Link>
       </div>
@@ -79,7 +78,7 @@ function Navbar() {
         <ul>
           {links.slice(0,3).map((link) => (
             <li key={link.name} className="inline-block mx-4">
-              <Link href={link.href} className="text-white hover:text-gray-900">
+              <Link href={link.href} className="text-white hover:text-foreground">
                 {link.name}
               </Link>
             </li>

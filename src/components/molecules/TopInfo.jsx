@@ -57,7 +57,6 @@ export default TopInfo;
 function Changes({ ch }) {
   const num = checkNumberSign(ch);
 
-  // console.log(num);
 
   return (
     <div className="flex flex-col gap-1 items-center text-[.7em] font-lg">

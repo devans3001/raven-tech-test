@@ -18,7 +18,6 @@ function OrderBook() {
   const symbol = formatToBinanceSymbol(activeSymbol);
   const { data, isPending } = useOrderBook(symbol);
 
-  // console.log(symbol);
   const midPrice = 12323;
 
   return (

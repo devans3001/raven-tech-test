@@ -32,7 +32,6 @@ function TradeBuyLimit() {
   const { control, handleSubmit } = methods;
 
   const onSubmit = (data) => {
-    console.log("Submitted:", data);
     toast("lol")
     // setStoredForm(data);
   };
@@ -40,7 +39,6 @@ function TradeBuyLimit() {
   // Memoize arrays to prevent unnecessary re-renders
   const memoizedGoodArr = useMemo(() => goodArr, []);
   const memoizedCoun = useMemo(() => coun, []);
-  console.log("limit buy")
 
   return (
     <div className="mt-2">

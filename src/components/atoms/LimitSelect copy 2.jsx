@@ -12,7 +12,6 @@ import LimitLabel from "./LimitLabel";
 
 export function LimitSelect({ label, arr, name = "type", control }) {
 
-  // console.log("limit select")
   // Local state fallback if `control` is not provided
   const [localValue, setLocalValue] = useState("");
 

@@ -27,3 +27,16 @@ This is a frontend challenge for a simplified crypto exchange UI, built with Nex
 - State/Data: TanStack Query
 - API: CoinGecko (for coins), Binance (for kline/trades)
 
+📂 Project Setup
+
+## 1. Clone the repository
+
+git clone https://github.com/devans3001/raven-tech-test.git
+cd raven-tech-test
+npm install
+npm run dev
+
+
+✅ Test Credentials
+
+No real login is required. Just input any valid email to simulate authentication.
